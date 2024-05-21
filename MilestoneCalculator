@@ -1,0 +1,69 @@
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class MilestoneCalculator extends JFrame {
+    private JTextField milestone1Field;
+    private JTextField milestone2Field;
+    private JTextField terminalField;
+
+    public MilestoneCalculator() {
+        setTitle("Milestone");
+        setSize(300, 200); setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(null);
+
+        JLabel milestone1Label = new JLabel("Milestone 1 (25%):");
+        milestone1Label.setBounds(20, 20, 120, 20);
+        add(milestone1Label);
+
+        milestone1Field = new JTextField();
+        milestone1Field.setBounds(150, 20, 100, 20);
+        add(milestone1Field);
+
+        JLabel milestone2Label = new JLabel("Milestone 2 (40%);");
+        milestone2Label.setBounds(20, 50, 120, 20);
+        add(milestone2Label);
+
+        milestone2Field = new JTextField();
+        milestone2Field.setBounds(150, 50, 100, 20);
+        add(milestone2Field);
+
+        JLabel terminalLabel = new JLabel("Terminal Assessment (35%):");
+        terminalLabel.setBounds(20, 80, 150, 20);
+        add(terminalLabel);
+
+        terminalField = new JTextField();
+        terminalField.setBounds(180, 80, 100, 20);
+        add(terminalField);
+
+        JButton calculateButton = new JButton("Calculator");
+        calculateButton.setBounds(100, 120, 100, 30);
+        add(calculateButton);
+
+        calculateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                calculateGrades();
+            }
+        });
+    }
+
+    private void calculateGrades() {
+        try {
+            double milestone1 = Double.parseDouble(milestone1Field.getText());
+            double milestone2 = Double.parseDouble(milestone2Field.getText());
+            double terminal = Double.parseDouble(terminalField.getText());
+
+            if (milestone1 < 0 || milestone1 > 25 || milestone2 < 0 || milestone2 > 40 || terminal < 0 || terminal > 35) { JOptionPane.showMessageDialog(this, "Invalid input. Grades must be between 0 and the maximum points per Milestone.");
+            } else {
+                double totalGrade = (milestone1 * 0.25) + (milestone2 * 0.40) + (terminal * 0.35); JOptionPane.showMessageDialog(this, "Total Grade: " + totalGrade);
+            }
+        } catch (NumberFormatException ex) { JOptionPane.showMessageDialog(this, "Invalid input. Please enter numeric values.");
+    }
+}
+
+public static void main(String[] args) {
+    MilestoneCalculator calculator = new MilestoneCalculator();
+    calculator.setVisible(true);
+    }
+}
